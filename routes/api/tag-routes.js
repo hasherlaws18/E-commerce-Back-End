@@ -9,11 +9,7 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: Product,
-          attributes: ['id', 'product_name', 'price', 'stock'],
-          through: {
-            model: ProductTag,
-            attributes: []
-          }
+          attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
         }
       ]
     });
@@ -31,11 +27,7 @@ router.get('/:id', async (req, res) => {
       include: [
         {
           model: Product,
-          attributes: ['id', 'product_name', 'price', 'stock'],
-          through: {
-            model: ProductTag,
-            attributes: []
-          }
+          attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
         }
       ]
     });
@@ -56,7 +48,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   try{
     const TagData = await Tag.create(req.body);
-    rest.status(200).json(err);
+    rest.status(200).json(TagData);
   }catch (err) {
     res.status(400).json(err);
   }
