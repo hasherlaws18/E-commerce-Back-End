@@ -24,7 +24,10 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const CategoryData = await Category.findByPk(req.params.id, {
-      include: [{model: Product, as: 'product'}]
+      include: [{model: Product,
+        attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
+      }
+      ]
     });
 
     if(!CategoryData) {
